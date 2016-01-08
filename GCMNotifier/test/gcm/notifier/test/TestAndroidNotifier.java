@@ -11,10 +11,10 @@ public class TestAndroidNotifier extends TestNotifier {
 		"APA91bGsJd-eunu2yt_gh7vhFvGoA8nCViNrxtW9oyc4lYZG3CeO6ANmusRS3B9OG-ntYSOUqQfWrASPB-FaOnm25wt8YoAO_5eUJt_bpVUzagIVBoEriUtx9D_FTheP_GkoBrvWWFzJ";
 	deviceToken2 =
 		"APA91bGsJd-eunu2yt_gh7vhFvGoA8nCViNrxtW9oyc4lYZG3CeO6ANmusRS3B9OG-ntYSOUqQfWrASPB-FaOnm25wt8YoAO_5eUJt_bpVUzagIVBoEriUtx9D_FTheP_GkoBrvWWFzJ";
-	senderId = "AIzaSyChYRRxDWCzlDvRykGYWYvZMZfO31hLBrk";
+	senderId = "";// seNDER ID for android
 	messagePrefix = "GCM Notifier:";
 	titlePrefix = "GCM Notifier:";
-	soundName = "chime";
+	soundName = "default";
 	badge = "2";
 	if (deviceToken1 != null) {
 	    devices.add(deviceToken1);

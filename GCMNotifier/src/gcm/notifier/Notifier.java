@@ -28,6 +28,36 @@ public class Notifier {
 
     private static final String GCM_URL = "https://gcm-http.googleapis.com/gcm/send";
 
+    /**
+     * Send message from senderId to deviceToken
+     * 
+     * @param senderId
+     *            GCM sender id, can take from
+     *            https://developers.google.com/cloud-messaging/
+     * @param deviceToken
+     *            The value must be a registration token, notification key, or
+     *            topic.
+     * @param title
+     *            Indicates notification title. This field is not visible on iOS
+     *            phones and tablets.
+     * @param message
+     *            Indicates notification body text.
+     * @param badge
+     *            Indicates the badge on client app home icon.
+     * @param sound
+     *            Indicates a sound to play when the device receives the
+     *            notification. Supports default, or the filename of a sound
+     *            resource bundled in the app.
+     * @return {@link HttpResponseMessage} Message list may be contains error
+     *         messages.
+     * @throws NoDeviceException
+     *             thrown is deviceToken is null
+     * @throws NoSenderIdException
+     *             thrown if senderId is null
+     * @throws ConnectionException
+     *             thrown if any error is taken from GCM Server except delivery
+     *             errors
+     */
     public static HttpResponseMessage sendGCMMessage(String senderId, String deviceToken, String title, String message, String badge,
 	    String sound) throws NoDeviceException, NoSenderIdException, ConnectionException {
 	List<String> devices = new ArrayList<String>();
@@ -35,6 +65,37 @@ public class Notifier {
 	return sendGCMMessage(senderId, devices, title, message, badge, sound);
     }
 
+    /**
+     * Send message from senderId to deviceToken
+     * 
+     * @param senderId
+     *            GCM sender id, can take from
+     *            https://developers.google.com/cloud-messaging/
+     * @param devices
+     *            This parameter specifies a list of devices (registration
+     *            tokens, or IDs) receiving a multicast message. It must contain
+     *            at least 1 and at most 1000 registration tokens.
+     * @param title
+     *            Indicates notification title. This field is not visible on iOS
+     *            phones and tablets.
+     * @param message
+     *            Indicates notification body text.
+     * @param badge
+     *            Indicates the badge on client app home icon.
+     * @param sound
+     *            Indicates a sound to play when the device receives the
+     *            notification. Supports default, or the filename of a sound
+     *            resource bundled in the app.
+     * @return {@link HttpResponseMessage} Message list may be contains error
+     *         messages.
+     * @throws NoDeviceException
+     *             thrown is deviceToken is null
+     * @throws NoSenderIdException
+     *             thrown if senderId is null
+     * @throws ConnectionException
+     *             thrown if any error is taken from GCM Server except delivery
+     *             errors
+     */
     public static HttpResponseMessage sendGCMMessage(String senderId, List<String> devices, String title, String message, String badge,
 	    String sound) throws NoDeviceException, NoSenderIdException, ConnectionException {
 	if (senderId == null) {

@@ -1,4 +1,11 @@
 package gcm.notifier.model.send;
+
+/**
+ * Notification object is required for ios
+ * 
+ * @author ykartal
+ *
+ */
 public class Notification {
 
     private String title;

@@ -3,12 +3,23 @@ package gcm.notifier.model.recieve;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+/**
+ * This class include result of push message and return messages
+ * 
+ * @author ykartal
+ *
+ */
 public class HttpResponseMessage {
 
     private Long multicast_id;
     private int success;
     private int failure;
     private int canonical_ids;
+
+    // return messages as a list
     private List<Message> results = new ArrayList<Message>();
 
     public Long getMulticast_id() {
@@ -19,6 +30,10 @@ public class HttpResponseMessage {
 	this.multicast_id = multicast_id;
     }
 
+    /**
+     * 
+     * @return success count
+     */
     public int getSuccess() {
 	return success;
     }
@@ -27,6 +42,10 @@ public class HttpResponseMessage {
 	this.success = success;
     }
 
+    /**
+     * 
+     * @return failure count
+     */
     public int getFailure() {
 	return failure;
     }
@@ -49,6 +68,16 @@ public class HttpResponseMessage {
 
     public void setResults(List<Message> results) {
 	this.results = results;
+    }
+
+    /**
+     * Return JSON formatted value of this object
+     */
+    @Override
+    public String toString() {
+	Gson gson = new GsonBuilder().create();
+	String json = gson.toJson(this);
+	return json;
     }
 
 }

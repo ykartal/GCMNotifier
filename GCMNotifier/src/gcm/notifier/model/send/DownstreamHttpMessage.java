@@ -6,6 +6,12 @@ import java.util.Properties;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+/**
+ * Message object to send push message over the GCM
+ * 
+ * @author ykartal
+ *
+ */
 public class DownstreamHttpMessage {
 
     // targets
@@ -25,6 +31,15 @@ public class DownstreamHttpMessage {
     private Properties data = new Properties();
     private Notification notification = new Notification();
 
+    /**
+     * 
+     * @param to
+     *            Device token which will receive the message
+     * @param title
+     *            message title
+     * @param body
+     *            message content
+     */
     public DownstreamHttpMessage(String to, String title, String body) {
 	this.to = to;
 	this.getNotification().setTitle(title);
@@ -33,6 +48,15 @@ public class DownstreamHttpMessage {
 	this.addData("message", body);
     }
 
+    /**
+     * 
+     * @param to
+     *            Device token list which will receive the message
+     * @param title
+     *            message title
+     * @param body
+     *            message content
+     */
     public DownstreamHttpMessage(List<String> to, String title, String body) {
 	if (to.size() == 1) {
 	    this.to = to.get(0);
@@ -140,11 +164,13 @@ public class DownstreamHttpMessage {
 	this.notification = notification;
     }
 
+    /**
+     * Return JSON formatted value of this object
+     */
     @Override
     public String toString() {
 	Gson gson = new GsonBuilder().create();
 	String json = gson.toJson(this);
-	System.out.println(json);
 	return json;
     }
 
