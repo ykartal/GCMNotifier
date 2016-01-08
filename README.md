@@ -2,7 +2,8 @@
 Java Library for Google Cloud Messaging to send IOS &amp; Android apps.
 
 Use
-`HttpResponseMessage response = Notifier.sendGCMMessage(senderId, devices, title, message, null, null);`
+
+`HttpResponseMessage response = Notifier.sendGCMMessage(senderId, devices, title, message, badge, sound);`
 method to send message to a device or devices.
  
 **Parameters:**
