@@ -1,5 +1,5 @@
 # GCMNotifier
-Java Library for Google Cloud Messaging to send IOS &amp; Android apps.
+Java Library for Google Cloud Messaging to send notifications to IOS &amp; Android apps.
 
 Use
 
