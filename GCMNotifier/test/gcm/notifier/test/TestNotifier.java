@@ -3,7 +3,7 @@ package gcm.notifier.test;
 import gcm.notifier.Notifier;
 import gcm.notifier.exception.ConnectionException;
 import gcm.notifier.exception.NoDeviceException;
-import gcm.notifier.exception.NoSenderIdException;
+import gcm.notifier.exception.NoServerApiKeyException;
 import gcm.notifier.model.recieve.HttpResponseMessage;
 
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ public abstract class TestNotifier {
 
     protected String deviceToken1;
     protected String deviceToken2;
-    protected String senderId;
+    protected String serverApiKey;
     protected String messagePrefix;
     protected String titlePrefix;
     protected String soundName;
@@ -33,11 +33,11 @@ public abstract class TestNotifier {
 	String title = titlePrefix + "Title Success";
 	String message = messagePrefix + "Message Success";
 	try {
-	    HttpResponseMessage response = Notifier.sendGCMMessage(senderId, devices, title, message, null, null);
+	    HttpResponseMessage response = Notifier.sendGCMMessage(serverApiKey, devices, title, message, null, null);
 	    Assert.assertTrue("Success Count:" + response.getSuccess(), response.getSuccess() > 0);
 	} catch (NoDeviceException e) {
 	    Assert.assertTrue(e.getMessage(), false);
-	} catch (NoSenderIdException e) {
+	} catch (NoServerApiKeyException e) {
 	    Assert.assertTrue(e.getMessage(), false);
 	} catch (ConnectionException e) {
 	    Assert.assertTrue(e.getMessage(), false);
@@ -45,15 +45,15 @@ public abstract class TestNotifier {
     }
 
     @Test
-    public void testSendNotifierWrongSenderId() {
+    public void testSendNotifierWrongServerApiKey() {
 	String title = titlePrefix + "Title Success";
 	String message = messagePrefix + "Message Success";
 	try {
-	    HttpResponseMessage response = Notifier.sendGCMMessage(senderId + "ERROR", devices, title, message, null, null);
+	    HttpResponseMessage response = Notifier.sendGCMMessage(serverApiKey + "ERROR", devices, title, message, null, null);
 	    Assert.assertEquals("Success Count", response.getSuccess(), 0);
 	} catch (NoDeviceException e) {
 	    Assert.assertTrue(e.getMessage(), false);
-	} catch (NoSenderIdException e) {
+	} catch (NoServerApiKeyException e) {
 	    Assert.assertTrue(e.getMessage(), false);
 	} catch (ConnectionException e) {
 	    Assert.assertTrue(e.getMessage(), e.getMessage().contains("401"));
@@ -61,7 +61,7 @@ public abstract class TestNotifier {
     }
 
     @Test
-    public void testSendNotifierNoSenderId() {
+    public void testSendNotifierNoServerApiKey() {
 	String title = titlePrefix + "Title Success";
 	String message = messagePrefix + "Message Success";
 	try {
@@ -69,7 +69,7 @@ public abstract class TestNotifier {
 	    Assert.assertTrue(response.getSuccess() == 0);
 	} catch (NoDeviceException e) {
 	    Assert.assertTrue(e.getMessage(), false);
-	} catch (NoSenderIdException e) {
+	} catch (NoServerApiKeyException e) {
 	    Assert.assertTrue(e.getMessage(), true);
 	} catch (ConnectionException e) {
 	    Assert.assertTrue(e.getMessage(), false);
@@ -81,11 +81,11 @@ public abstract class TestNotifier {
 	String title = titlePrefix + "Title Success";
 	String message = messagePrefix + "Message Success";
 	try {
-	    HttpResponseMessage response = Notifier.sendGCMMessage(senderId, new ArrayList<String>(), title, message, null, null);
+	    HttpResponseMessage response = Notifier.sendGCMMessage(serverApiKey, new ArrayList<String>(), title, message, null, null);
 	    Assert.assertFalse("Success Count:" + response.getSuccess(), response.getSuccess() > 0);
 	} catch (NoDeviceException e) {
 	    Assert.assertTrue(e.getMessage(), true);
-	} catch (NoSenderIdException e) {
+	} catch (NoServerApiKeyException e) {
 	    Assert.assertTrue(e.getMessage(), false);
 	} catch (ConnectionException e) {
 	    Assert.assertTrue(e.getMessage(), false);
@@ -96,12 +96,12 @@ public abstract class TestNotifier {
     public void testSendNotifierWithoutMessage() {
 	String title = titlePrefix + "Title Success";
 	try {
-	    HttpResponseMessage response = Notifier.sendGCMMessage(senderId, devices, title, null, null, null);
+	    HttpResponseMessage response = Notifier.sendGCMMessage(serverApiKey, devices, title, null, null, null);
 	    // Empty message sent
 	    Assert.assertTrue("Success Count:" + response.getSuccess(), response.getSuccess() > 0);
 	} catch (NoDeviceException e) {
 	    Assert.assertTrue(e.getMessage(), false);
-	} catch (NoSenderIdException e) {
+	} catch (NoServerApiKeyException e) {
 	    Assert.assertTrue(e.getMessage(), false);
 	} catch (ConnectionException e) {
 	    Assert.assertTrue(e.getMessage(), false);
@@ -113,11 +113,11 @@ public abstract class TestNotifier {
 	String title = titlePrefix + "Title Success";
 	String message = messagePrefix + "Message Success";
 	try {
-	    HttpResponseMessage response = Notifier.sendGCMMessage(senderId, devices, title, message, badge, null);
+	    HttpResponseMessage response = Notifier.sendGCMMessage(serverApiKey, devices, title, message, badge, null);
 	    Assert.assertTrue("Success Count:" + response.getSuccess(), response.getSuccess() > 0);
 	} catch (NoDeviceException e) {
 	    Assert.assertTrue(e.getMessage(), false);
-	} catch (NoSenderIdException e) {
+	} catch (NoServerApiKeyException e) {
 	    Assert.assertTrue(e.getMessage(), false);
 	} catch (ConnectionException e) {
 	    Assert.assertTrue(e.getMessage(), false);
@@ -129,11 +129,11 @@ public abstract class TestNotifier {
 	String title = titlePrefix + "Title Success";
 	String message = messagePrefix + "Message Success";
 	try {
-	    HttpResponseMessage response = Notifier.sendGCMMessage(senderId, devices, title, message, null, soundName);
+	    HttpResponseMessage response = Notifier.sendGCMMessage(serverApiKey, devices, title, message, null, soundName);
 	    Assert.assertTrue("Success Count:" + response.getSuccess(), response.getSuccess() > 0);
 	} catch (NoDeviceException e) {
 	    Assert.assertTrue(e.getMessage(), false);
-	} catch (NoSenderIdException e) {
+	} catch (NoServerApiKeyException e) {
 	    Assert.assertTrue(e.getMessage(), false);
 	} catch (ConnectionException e) {
 	    Assert.assertTrue(e.getMessage(), false);
@@ -147,12 +147,12 @@ public abstract class TestNotifier {
 	String invalidToken =
 		"k2G5SyiWCqY:APA91bHxE4VkBoCudqm2FQyF75U4ucrC6XGlF4A-GWzYwIy0iiRN6hMLSh920Jtds0FIvQe4EAG-SR5MQ4vV9UE9VIYbW_xtJk-LzFU4Qnm1qpoN2Ht00XTASjmcmYj9UsTDPvvUF10N";
 	try {
-	    HttpResponseMessage response = Notifier.sendGCMMessage(senderId, invalidToken, title, message, null, null);
+	    HttpResponseMessage response = Notifier.sendGCMMessage(serverApiKey, invalidToken, title, message, null, null);
 	    Assert.assertTrue("Failure Count:" + response.getFailure(), response.getFailure() == 1);
 	    Assert.assertEquals("NotRegistered", response.getResults().get(0).getError());
 	} catch (NoDeviceException e) {
 	    Assert.assertTrue(e.getMessage(), false);
-	} catch (NoSenderIdException e) {
+	} catch (NoServerApiKeyException e) {
 	    Assert.assertTrue(e.getMessage(), false);
 	} catch (ConnectionException e) {
 	    Assert.assertTrue(e.getMessage(), false);
@@ -167,12 +167,12 @@ public abstract class TestNotifier {
 	    message += message; // increase the message size
 	}
 	try {
-	    HttpResponseMessage response = Notifier.sendGCMMessage(senderId, devices, title, message, null, null);
+	    HttpResponseMessage response = Notifier.sendGCMMessage(serverApiKey, devices, title, message, null, null);
 	    Assert.assertTrue("Failure Count:" + response.getFailure(), response.getFailure() > 1);
 	    Assert.assertEquals("MessageTooBig", response.getResults().get(0).getError());
 	} catch (NoDeviceException e) {
 	    Assert.assertTrue(e.getMessage(), false);
-	} catch (NoSenderIdException e) {
+	} catch (NoServerApiKeyException e) {
 	    Assert.assertTrue(e.getMessage(), false);
 	} catch (ConnectionException e) {
 	    Assert.assertTrue(e.getMessage(), false);

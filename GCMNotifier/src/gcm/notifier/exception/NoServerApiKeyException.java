@@ -6,9 +6,9 @@ package gcm.notifier.exception;
  * @author ykartal
  *
  */
-public class NoSenderIdException extends Exception {
+public class NoServerApiKeyException extends Exception {
 
-    public NoSenderIdException() {
+    public NoServerApiKeyException() {
 	super("A valid Sender Id must be send");
     }
 

@@ -2,7 +2,7 @@ package gcm.notifier;
 
 import gcm.notifier.exception.ConnectionException;
 import gcm.notifier.exception.NoDeviceException;
-import gcm.notifier.exception.NoSenderIdException;
+import gcm.notifier.exception.NoServerApiKeyException;
 import gcm.notifier.model.recieve.HttpResponseMessage;
 import gcm.notifier.model.send.DownstreamHttpMessage;
 
@@ -29,9 +29,9 @@ public class Notifier {
     private static final String GCM_URL = "https://gcm-http.googleapis.com/gcm/send";
 
     /**
-     * Send message from senderId to deviceToken
+     * Send message from serverApiKey to deviceToken
      * 
-     * @param senderId
+     * @param serverApiKey
      *            GCM sender id, can take from
      *            https://developers.google.com/cloud-messaging/
      * @param deviceToken
@@ -52,23 +52,23 @@ public class Notifier {
      *         messages.
      * @throws NoDeviceException
      *             thrown is deviceToken is null
-     * @throws NoSenderIdException
-     *             thrown if senderId is null
+     * @throws NoserverApiKeyException
+     *             thrown if serverApiKey is null
      * @throws ConnectionException
      *             thrown if any error is taken from GCM Server except delivery
      *             errors
      */
-    public static HttpResponseMessage sendGCMMessage(String senderId, String deviceToken, String title, String message, String badge,
-	    String sound) throws NoDeviceException, NoSenderIdException, ConnectionException {
+    public static HttpResponseMessage sendGCMMessage(String serverApiKey, String deviceToken, String title, String message, String badge,
+	    String sound) throws NoDeviceException, NoServerApiKeyException, ConnectionException {
 	List<String> devices = new ArrayList<String>();
 	devices.add(deviceToken);
-	return sendGCMMessage(senderId, devices, title, message, badge, sound);
+	return sendGCMMessage(serverApiKey, devices, title, message, badge, sound);
     }
 
     /**
-     * Send message from senderId to deviceToken
+     * Send message from serverApiKey to deviceToken
      * 
-     * @param senderId
+     * @param serverApiKey
      *            GCM sender id, can take from
      *            https://developers.google.com/cloud-messaging/
      * @param devices
@@ -90,16 +90,16 @@ public class Notifier {
      *         messages.
      * @throws NoDeviceException
      *             thrown is deviceToken is null
-     * @throws NoSenderIdException
-     *             thrown if senderId is null
+     * @throws NoserverApiKeyException
+     *             thrown if serverApiKey is null
      * @throws ConnectionException
      *             thrown if any error is taken from GCM Server except delivery
      *             errors
      */
-    public static HttpResponseMessage sendGCMMessage(String senderId, List<String> devices, String title, String message, String badge,
-	    String sound) throws NoDeviceException, NoSenderIdException, ConnectionException {
-	if (senderId == null) {
-	    throw new NoSenderIdException();
+    public static HttpResponseMessage sendGCMMessage(String serverApiKey, List<String> devices, String title, String message, String badge,
+	    String sound) throws NoDeviceException, NoServerApiKeyException, ConnectionException {
+	if (serverApiKey == null) {
+	    throw new NoServerApiKeyException();
 	}
 	if (devices.size() > 0) {
 	    try {
@@ -107,7 +107,7 @@ public class Notifier {
 		title = title == null ? "" : title;
 		message = message == null ? "" : message;
 		badge = badge == null ? "1" : badge;
-		sound = sound == null ? "" : sound;
+		sound = sound == null ? "default" : sound;
 		URL url = new URL(GCM_URL);
 
 		DownstreamHttpMessage downstreamHTTPMessage = new DownstreamHttpMessage(devices, title, message);
@@ -117,6 +117,7 @@ public class Notifier {
 		downstreamHTTPMessage.getNotification().setBadge(badge);
 		downstreamHTTPMessage.getNotification().setSound(sound);
 		String messageToSend = downstreamHTTPMessage.toString();
+		System.out.println(messageToSend);
 		// Open connection
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
@@ -125,7 +126,7 @@ public class Notifier {
 
 		// Set the headers
 		conn.setRequestProperty("Content-Type", "application/json");
-		conn.setRequestProperty("Authorization", "key=" + senderId);
+		conn.setRequestProperty("Authorization", "key=" + serverApiKey);
 		conn.setDoOutput(true);
 
 		// Get connection output stream

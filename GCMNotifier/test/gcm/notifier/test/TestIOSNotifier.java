@@ -11,7 +11,7 @@ public class TestIOSNotifier extends TestNotifier {
 		"lEUmh70qIxQ:APA91bG_Ee1Q1bIeLwktXQOgXvo2pKm8ouQvTfZn6--EfjBqu9STzdK8HWERdq-ywCify3AxiA3q9LoclXq93_lRtCOl0NqBVr-uPS9ju6Vs1z2hS09K0B6UdQwEcmi09GslAyP78pff";
 	deviceToken2 =
 		"lEUmh70qIxQ:APA91bG_Ee1Q1bIeLwktXQOgXvo2pKm8ouQvTfZn6--EfjBqu9STzdK8HWERdq-ywCify3AxiA3q9LoclXq93_lRtCOl0NqBVr-uPS9ju6Vs1z2hS09K0B6UdQwEcmi09GslAyP78pff";
-	senderId = "";// SENDER ID
+	serverApiKey = "AIzaSyDzOezvtoLVeFgDOd4lIDiOEZJeYO6xJcI";
 	messagePrefix = "GCM Notifier:";
 	titlePrefix = "GCM Notifier:";
 	soundName = "default";
