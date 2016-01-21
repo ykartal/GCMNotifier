@@ -18,7 +18,7 @@ method to send message to a device or devices.
 - **HttpResponseMessage** Message list may be contains error messages.
 
 **Throws:**
-- **NoDeviceException** - thrown is deviceToken is null
+- **NoDeviceException** - thrown if deviceToken is null
 - **NoServerApiKeyException** - thrown if serverApiKey is null
 - **ConnectionException** - thrown if any error is taken from GCM Server except delivery errors
 
