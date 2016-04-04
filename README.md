@@ -1,13 +1,13 @@
 # GCMNotifier
-Java Library for Google Cloud Messaging to send IOS &amp; Android apps.
+Java Library for Google Cloud Messaging to send notifications to IOS &amp; Android apps.
 
 Use
 
-`HttpResponseMessage response = Notifier.sendGCMMessage(senderId, devices, title, message, badge, sound);`
+`HttpResponseMessage response = Notifier.sendGCMMessage(serverApiKey, devices, title, message, badge, sound);`
 method to send message to a device or devices.
  
 **Parameters:**
- - **senderId** GCM sender id, can take from https://developers.google.com/cloud-messaging/
+ - **serverApiKey** GCM Server API Key, can take from https://developers.google.com/cloud-messaging/
  - **devices** This parameter specifies a list of devices (registration tokens, or IDs) receiving a multicast message. It must contain at least 1 and at most 1000 registration tokens.
  - **title** Indicates notification title. This field is not visible on iOS phones and tablets.
  - **message** Indicates notification body text.
@@ -18,11 +18,11 @@ method to send message to a device or devices.
 - **HttpResponseMessage** Message list may be contains error messages.
 
 **Throws:**
-- **NoDeviceException** - thrown is deviceToken is null
-- **NoSenderIdException** - thrown if senderId is null
+- **NoDeviceException** - thrown if deviceToken is null
+- **NoServerApiKeyException** - thrown if serverApiKey is null
 - **ConnectionException** - thrown if any error is taken from GCM Server except delivery errors
 
 Also have a look at the tests to see alternative usages
 
 There are seperated test cases for android and ios tests but they extends the same class. 
-Only replace the senderId and token values in the test classes and run the test.
+Only replace the serverApiKey and token values in the test classes and run the test.
