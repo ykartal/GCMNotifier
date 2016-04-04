@@ -7,11 +7,9 @@ public class TestIOSNotifier extends TestNotifier {
     @Override
     public void setUp() {
 	devices = new ArrayList<String>();
-	deviceToken1 =
-		"lEUmh70qIxQ:APA91bG_Ee1Q1bIeLwktXQOgXvo2pKm8ouQvTfZn6--EfjBqu9STzdK8HWERdq-ywCify3AxiA3q9LoclXq93_lRtCOl0NqBVr-uPS9ju6Vs1z2hS09K0B6UdQwEcmi09GslAyP78pff";
-	deviceToken2 =
-		"lEUmh70qIxQ:APA91bG_Ee1Q1bIeLwktXQOgXvo2pKm8ouQvTfZn6--EfjBqu9STzdK8HWERdq-ywCify3AxiA3q9LoclXq93_lRtCOl0NqBVr-uPS9ju6Vs1z2hS09K0B6UdQwEcmi09GslAyP78pff";
-	serverApiKey = "AIzaSyDzOezvtoLVeFgDOd4lIDiOEZJeYO6xJcI";
+	deviceToken1 = "";
+	deviceToken2 = "";
+	serverApiKey = "";
 	messagePrefix = "GCM Notifier:";
 	titlePrefix = "GCM Notifier:";
 	soundName = "default";

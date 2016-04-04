@@ -32,7 +32,7 @@ public class Notifier {
      * Send message from serverApiKey to deviceToken
      * 
      * @param serverApiKey
-     *            GCM sender id, can take from
+     *            GCM server api key, can take from
      *            https://developers.google.com/cloud-messaging/
      * @param deviceToken
      *            The value must be a registration token, notification key, or
@@ -69,7 +69,7 @@ public class Notifier {
      * Send message from serverApiKey to deviceToken
      * 
      * @param serverApiKey
-     *            GCM sender id, can take from
+     *            GCM server api key, can take from
      *            https://developers.google.com/cloud-messaging/
      * @param devices
      *            This parameter specifies a list of devices (registration

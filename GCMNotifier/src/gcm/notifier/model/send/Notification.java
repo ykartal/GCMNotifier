@@ -1,5 +1,6 @@
 package gcm.notifier.model.send;
 
+
 /**
  * Notification object is required for ios
  * 

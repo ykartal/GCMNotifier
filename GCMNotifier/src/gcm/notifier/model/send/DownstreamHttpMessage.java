@@ -29,6 +29,7 @@ public class DownstreamHttpMessage {
 
     // Payload
     private Properties data = new Properties();
+    private Properties extra = new Properties();
     private Notification notification = new Notification();
 
     /**
@@ -46,6 +47,10 @@ public class DownstreamHttpMessage {
 	this.getNotification().setBody(body);
 	this.addData("title", title);
 	this.addData("message", body);
+	this.addData("rapor_id", "347138");
+	this.addData("rapor_tipi", "RADYOLOJI");
+	this.addData("sonuc_tur", "Rapor");
+	// this.addData("barkod", "05557529");
     }
 
     /**
@@ -67,6 +72,12 @@ public class DownstreamHttpMessage {
 	this.getNotification().setBody(body);
 	this.addData("title", title);
 	this.addData("message", body);
+	// this.addData("sonuc_tur", "Laboratuvar");
+	this.addData("tc_kimlik_no", "15575011948");
+	// this.addData("barkod", "05557529");
+	this.addData("rapor_id", "347138");
+	this.addData("rapor_tipi", "RADYOLOJI");
+	this.addData("sonuc_tur", "Rapor");
     }
 
     public String getTo() {
