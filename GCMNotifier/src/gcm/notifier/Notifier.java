@@ -26,7 +26,7 @@ public class Notifier {
 
     }
 
-    private static final String GCM_URL = "https://gcm-http.googleapis.com/gcm/send";
+    private static final String GCM_URL = "https://fcm.googleapis.com/fcm/send";
 
     /**
      * Send message from serverApiKey to deviceToken
